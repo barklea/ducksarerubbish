@@ -1,0 +1,196 @@
+---
+title: "R introduction"
+author: "Leanne"
+date: "13 October 2017"
+output: html_document
+---
+```{r}
+1 + 100
+10*10
+10*945/3
+(1+1)/(5*7)
+```
+Now lets' try something more complicated
+
+```{r}
+sin(1)
+```
+```{r}
+log(1)
+
+```
+Create some variables
+
+
+
+```{r}
+x <- sin(1)
+x
+x * 10
+x == 0.841471
+x = 10
+x == 5
+x == 10
+x <- sin(1)
+x == sin(1)
+x == 10
+
+```
+Vectors
+
+```{r}
+myVector <- 1:10
+myVector
+
+myVector*2
+
+```
+
+Installing packages
+
+```{r eval=FALSE}
+install.packages("ggplot2")
+```
+
+compare mass to age
+```{r}
+mass <- 47.5
+age <- 122
+mass <- mass * 2.3
+age <- age - 20
+
+mass > age
+mass == age
+
+```
+
+The mass was larger than age
+
+```{r}
+cat_file <- "https://raw.githubusercontent.com/COMBINE-Australia/RNAseq-R/gh-pages/data/feline-data.csv"
+download.file(cat_file, destfile="feline-data.csv")
+cats <- read.csv("feline-data.csv")
+
+cats
+```
+
+```{r}
+cats <- read.csv("data/feline-data.csv")
+
+getwd()
+
+file.exists("feline-data.csv")
+
+file.exists("data/feline-data.csv")
+
+```
+```{r}
+tmp <- read.delim("feline-data.csv")
+tmp
+
+```
+```{r}
+cats$coat
+cats$weight
+cats[2,]
+cats$weight * 100
+```
+```{r}
+cats
+cats$weight
+
+fat <- cats$weight
+fat
+
+
+```
+
+```{r}
+fat
+```
+
+```{r}
+my_sum <- function(a,b) {
+  sum1 <- a + b
+  return (sum1)
+  }
+my_sum(2,4)
+```
+```{r}
+fahr_kelvin <- function(temp) {
+  kelv <- (temp-32) * (5/9) + 273.15
+  return(kelv)
+}
+
+fahr_kelvin(65)
+
+```
+```{r}
+kelvin_to_celsius <- function(temp) {
+  celsius <- (temp-273.15)
+  return(celsius)
+}
+
+kelvin_to_celsius(65)
+
+```
+fahr to celsius
+
+```{r}
+fahr_to_celsius <- function(temp) {
+  celsius <- kelvin_to_celsius(fahr_kelvin(temp))
+  return(celsius)
+}
+
+fahr_to_celsius(212)
+
+```
+
+```{r}
+fahr_kelvin <- function(temp) {
+  if (!is.numeric(temp)){
+    stop("Temp has to be a numeric value! Try again")
+  }
+  kelvin <- ((temp - 32) * (5/9)) + 273.15
+  return(kelvin)
+}
+
+fahr_kelvin(45)
+fahr_kelvin("hello")
+
+fahr_kelvin2 <- function(temp) {
+  stopifnot(is.numeric(temp))
+  kelvin <- ((temp - 32) * (5/9)) + 273.15
+  return(kelvin)
+}
+
+fahr_kelvin2("er")
+fahr_kelvin("kev")
+
+gapminder_file <- "https://raw.githubusercontent.com/COMBINE-Australia/RNAseq-R/gh-pages/data/gapminder-FiveYearData.csv"
+download.file(gapminder_file, destfile="gapminder-FiveYearData.csv")
+gapminder <- read.csv("gapminder-FiveYearData.csv")
+
+
+
+```
+```{r}
+calcGDP<-function(dat){
+  gdp<- dat$pop*dat$gdpPercap
+  return(gdp)
+}
+
+calcGDP <- function(dat, year=NULL, country=NULL) {
+  if(!is.null(year)) {
+    dat <- dat[dat$year %in% year, ]
+  }
+  if (!is.null(country)) {
+    dat <- dat[dat$country %in% country,]
+  }
+  gdp <- dat$pop * dat$gdpPercap
+  
+  new <- cbind(dat, gdp=gdp)
+  return(new)
+}
+```
+
